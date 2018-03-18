@@ -8,11 +8,11 @@ class BTNode{//二叉树节点的类(model)
 
 class Circle{//二叉树节点的类(view)
 	constructor(data,x,y,r,color){
-		this.data = data;
-		this.x = x;
-		this.y = y;
-		this.r = r;
-		this.color = color;
+		this.data = data;//节点数据
+		this.x = x;//节点的横坐标
+		this.y = y;//节点的纵坐标
+		this.r = r;//节点的半径
+		this.color = color;//节点的颜色
 	}
 	render(){
 		ctx.beginPath();
@@ -89,6 +89,10 @@ function createBTree(){
 				errData.errMsg = '非法字符！';
 				errData.errSeen = true;
 
+				ctx.clearRect(0,0,width,height);
+				vm.middleResult = '';
+				vm.frontResult = '';
+
 				return false;
 			}
 
@@ -101,6 +105,10 @@ function createBTree(){
 				errData.errMsg = '后缀表达式错误！';
 				errData.errSeen = true;
 				flag = true;
+
+				ctx.clearRect(0,0,width,height);
+				vm.middleResult = '';
+				vm.frontResult = '';
 			}
 
 			//生成新的二叉树并入栈
@@ -111,6 +119,10 @@ function createBTree(){
 	if(stack.length>1){//如果剩下的元素多于1，说明输入的错误的后缀表达式
 		errData.errMsg = '操作数与操作符数量不匹配！';
 		errData.errSeen = true;
+
+		ctx.clearRect(0,0,width,height);
+		vm.middleResult = '';
+		vm.frontResult = '';
 
 		return false;
 	}
@@ -165,6 +177,7 @@ function middle(BTree){
 	})(BTree);
 }
 
+//先序遍历生成前缀表达式
 function front(BTree){
 	let arr = [];
 
