@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>2.2表达式树的建立和遍历</title>
+	<link rel="stylesheet" type="text/css" href="./node_modules/element-ui/lib/theme-chalk/index.css">
+	<link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body>
+
+	<div id="app">
+		<el-row>
+			<el-col :span=12 :offset=3>
+				<h1>{{title}}</h1>
+			</el-col>
+		</el-row>
+
+		<el-row>
+			<el-col :span="20" :offset="2">
+				<hr>
+			</el-col>
+		</el-row>
+
+		<el-row style="height: 30px">
+			<el-col :span="8" :offset="6">
+				<error></error>
+			</el-col>
+		</el-row>
+
+		<el-row :gutter="20" style="margin-top: 30px">
+			<el-col :span="8" :offset="6">			
+				<el-input placeholder="请输入一个后缀表达式,数字、运算符之间用|隔开" v-model="input" clearable @input="draw()"></el-input>
+			</el-col>
+			<el-col :span="8">
+				<el-button>Start!</el-button>
+			</el-col>
+		</el-row>
+		
+		<el-row style="margin-top: -15px">
+			<el-col :offset="6" :span="18">
+				<div id="hint">
+					&nbsp;运算符只能为+,-,*,/,^五个中的一个 (例如：2 | 30 | 4 | * | 10 | 5 | / | - | + )
+				</div>
+			</el-col>
+		</el-row>
+
+		<el-row>
+			<el-col :offset="6" :span="18">
+				<div id="result"><!-- 表达式的计算结果 -->
+					表达式的计算结果为：
+				</div>
+			</el-col>
+		</el-row>
+		<el-row style="margin-top: -10px">
+			<el-col :offset="6" :span="18">
+				<div id="middle"><!-- 中缀表达式 -->
+					中缀表达式：{{middleResult}}
+				</div>
+			</el-col>
+		</el-row>
+		<el-row style="margin-top: -10px">
+			<el-col :offset="6" :span="18">
+				<div id="front"><!-- 前缀表达式 -->
+					前缀表达式：{{frontResult}}
+				</div>
+			</el-col>
+		</el-row>
+
+		<el-row>
+			<el-col style="background: #e5e9f2;">&nbsp;</el-col>
+		</el-row>
+	
+		<el-row type="flex" justify="center" style="margin-top: -10px">
+			<div>
+				<h3>动态生成的二叉树</h3>
+			</div>
+		</el-row>
+
+		<el-row type="flex" justify="center" style="margin-top: -30px">
+			<canvas id="canvas" v-show="show" :height="500" :width="800">当前浏览器不支持canvas，请换更高级的浏览器<canvas>
+		</el-row>
+	</div>
+
+	<template id="error">
+			<el-alert type="error" :closable="false" :title="errMsg" v-show="errSeen"></el-alert>
+	</template>
+	
+	<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="./node_modules/element-ui/lib/index.js"></script>
+	<script type="text/javascript" src="./index.js"></script>
+</body>
+</html>
